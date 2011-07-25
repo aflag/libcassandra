@@ -15,6 +15,8 @@
 #include <transport/TSocket.h>
 #include <transport/TTransportUtils.h>
 
+#include <boost/shared_ptr.hpp>
+
 #include "libgenthrift/Cassandra.h"
 
 #include "libcassandra/cassandra.h"
@@ -63,18 +65,18 @@ CassandraFactory::CassandraFactory(const string& in_host, int in_port)
 CassandraFactory::~CassandraFactory() {}
 
 
-tr1::shared_ptr<Cassandra> CassandraFactory::create()
+boost::shared_ptr<Cassandra> CassandraFactory::create()
 {
   CassandraClient *thrift_client= createThriftClient(host, port);
-  tr1::shared_ptr<Cassandra> ret(new Cassandra(thrift_client, host, port));
+  boost::shared_ptr<Cassandra> ret(new Cassandra(thrift_client, host, port));
   return ret;
 }
 
 
-tr1::shared_ptr<Cassandra> CassandraFactory::create(const string& keyspace)
+boost::shared_ptr<Cassandra> CassandraFactory::create(const string& keyspace)
 {
   CassandraClient *thrift_client= createThriftClient(host, port);
-  tr1::shared_ptr<Cassandra> ret(new Cassandra(thrift_client, host, port, keyspace));
+  boost::shared_ptr<Cassandra> ret(new Cassandra(thrift_client, host, port, keyspace));
   return ret;
 }
 
