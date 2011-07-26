@@ -345,6 +345,9 @@ vector<Column> Cassandra::getSliceNames(const string& key,
   return result;
 }
 
+void Cassandra::truncate(const string& cf_name) {
+  thrift_client->truncate(cf_name);
+}
 
 vector<Column> Cassandra::getSliceNames(const string& key,
                                         const ColumnParent& col_parent,

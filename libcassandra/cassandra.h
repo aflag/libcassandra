@@ -296,6 +296,12 @@ public:
                                                      const std::string& column_family,
                                                      const std::string& super_column_name);
 
+  /**
+   * Truncate a column family
+   * @param[in] cf_name Column family name
+   */
+  void truncate(const std::string& cf_name);
+
   std::vector<org::apache::cassandra::Column> getSliceNames(const std::string& key,
                                                             const org::apache::cassandra::ColumnParent& col_parent,
                                                             org::apache::cassandra::SlicePredicate& pred,
