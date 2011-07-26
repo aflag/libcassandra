@@ -100,7 +100,7 @@ map<string, string> KeyspaceDefinition::getStrategyOptions() const
 
 void KeyspaceDefinition::setStrategyOptions(const map<string, string>& opts)
 {
-  (void) opts;
+  strategy_options.insert(opts.begin(), opts.end());
 }
 
 

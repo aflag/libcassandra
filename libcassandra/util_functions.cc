@@ -71,6 +71,12 @@ KsDef createKsDefObject(const KeyspaceDefinition& ks_def)
   KsDef thrift_ks_def;
   thrift_ks_def.name.assign(ks_def.getName());
   thrift_ks_def.strategy_class.assign(ks_def.getStrategyClass());
+  if (!ks_def.getStrategyOptions().empty()) {
+    thrift_ks_def.__isset.strategy_options = true;
+    const map<string, string>& strategy_options = ks_def.getStrategyOptions();
+    thrift_ks_def.strategy_options.insert(strategy_options.begin(),
+                                          strategy_options.end());
+  }
   vector<ColumnFamilyDefinition> cf_defs= ks_def.getColumnFamilies();
   for (vector<ColumnFamilyDefinition>::iterator it= cf_defs.begin();
        it != cf_defs.end();
